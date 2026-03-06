@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>4-Player Variant Platform</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-database-compat.js"></script>
+</head>
+<body>
+
+    <div id="sidebar">
+        <div class="section-title">Color</div>
+        <div class="color-grid">
+            <div class="color-btn active" id="btn-white" onclick="selectColor('white')">WHITE</div>
+            <div class="color-btn" id="btn-silver" onclick="selectColor('silver')">SILVER</div>
+            <div class="color-btn" id="btn-black" onclick="selectColor('black')">BLACK</div>
+            <div class="color-btn" id="btn-gold" onclick="selectColor('gold')">GOLD</div>
+        </div>
+
+        <div class="section-title">Pieces</div>
+        <div class="piece-grid" id="piece-tools"></div>
+        <button class="btn-action btn-secondary" id="btn-eraser" onclick="selectTool('eraser')" style="margin-top:20px">ERASER</button>
+    </div>
+
+    <div id="main-viewport">
+        <div id="board-container">
+            <div id="turn-indicator" class="turn-indicator" style="text-align: center; margin-bottom: 10px;">Editor Mode</div>
+            <div id="chess-board" class="active-board"></div>
+            <div id="game-board" class="hidden"></div>
+        </div>
+    </div>
+
+    <div id="settings">
+        <div class="section-title">Editor</div>
+        <div class="control-group">
+            <label>Size: <b id="dim-label">14 x 14</b></label>
+            <input type="range" min="8" max="18" value="14" step="2" oninput="changeSize(this.value)" style="width:100%">
+        </div>
+        <div class="control-group">
+            <label><input type="checkbox" id="team-mode" onchange="toggleTeamMode()"> Team Mode</label>
+        </div>
+        <button class="btn-action btn-secondary" onclick="clearBoard()">CLEAR BOARD</button>
+
+        <hr style="width:100%; border:0; border-top:1px solid #444; margin: 20px 0;">
+
+        <div class="section-title">Variant Management</div>
+        <div class="control-group">
+            <input type="text" id="variant-name" placeholder="Variant name" value="My Variant">
+        </div>
+        <button class="btn-action" onclick="saveVariant()">💾 SAVE VARIANT</button>
+        <div id="variant-list" style="margin-top:10px; max-height:150px; overflow-y:auto;"></div>
+
+        <hr style="width:100%; border:0; border-top:1px solid #444; margin: 20px 0;">
+
+        <div class="section-title">Play Online</div>
+        <button class="btn-action" onclick="createRoom()">🎮 CREATE ROOM</button>
+        <div class="control-group" style="display:flex; gap:5px; margin-top:10px;">
+            <input type="text" id="room-code" placeholder="Code" style="flex:1;">
+            <button class="btn-action" onclick="joinRoom()" style="margin-top:0; width: auto;">JOIN</button>
+        </div>
+        <div id="room-info"></div>
+        
+        <button class="btn-action btn-secondary" onclick="exitGameMode()" style="margin-top:10px">EXIT TO EDITOR</button>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
