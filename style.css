@@ -1,0 +1,182 @@
+:root {
+    --bg-dark: #1e1e1e;
+    --panel-bg: #2c2c2c;
+    --accent: #3498db;
+    --sq-light: #ecf0f1;
+    --sq-dark: #2c3e50;
+    --border-dark: #000000;
+    --text-light: #eeeeee;
+    --text-muted: #aaaaaa;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background-color: var(--bg-dark);
+    color: var(--text-light);
+    font-family: 'Segoe UI', 'Helvetica', sans-serif;
+    display: flex;
+    height: 100vh;
+    overflow: hidden;
+}
+
+#sidebar, #settings {
+    width: 260px;
+    background: var(--panel-bg);
+    padding: 15px;
+    border: 1px solid #444;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    z-index: 10;
+}
+
+#main-viewport {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+#board-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#chess-board, #game-board {
+    display: grid;
+    border: 5px solid var(--border-dark);
+    background: var(--border-dark);
+    transition: opacity 0.2s;
+}
+
+/* Ensure only one board shows at a time */
+.hidden {
+    display: none !important;
+}
+
+.active-board {
+    display: grid !important;
+    opacity: 1;
+}
+
+.square {
+    width: 45px;
+    height: 45px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.2rem;
+    cursor: crosshair;
+}
+
+.sq-light { background: var(--sq-light); color: #111; }
+.sq-dark { background: var(--sq-dark); color: #eee; }
+.sq-dead { background: transparent !important; pointer-events: none; }
+
+.square span {
+    display: inline-block;
+    filter: drop-shadow(2px 2px 3px rgba(0,0,0,0.5));
+    transition: transform 0.1s;
+    pointer-events: none;
+}
+
+.section-title {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.color-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5px;
+    margin-bottom: 20px;
+}
+
+.color-btn {
+    padding: 10px;
+    background: #3a3a3a;
+    border: 2px solid #555;
+    cursor: pointer;
+    text-align: center;
+    font-size: 0.7rem;
+    font-weight: bold;
+    color: white;
+}
+
+.color-btn.active {
+    border-color: var(--accent);
+    background: #4a4a4a;
+    box-shadow: 0 0 8px var(--accent);
+}
+
+.piece-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 5px;
+}
+
+.piece-tool {
+    background: #3a3a3a;
+    border: 1px solid #555;
+    aspect-ratio: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 2rem;
+    color: white;
+}
+
+.piece-tool.active {
+    border: 2px solid var(--accent);
+    box-shadow: 0 0 8px var(--accent);
+}
+
+.btn-action {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    background: var(--accent);
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 10px;
+    border-radius: 4px;
+}
+
+.btn-secondary { background: #4a4a4a; }
+
+.control-group input[type="text"] {
+    width: 100%;
+    padding: 8px;
+    background: #3a3a3a;
+    border: 1px solid #555;
+    color: white;
+}
+
+.btn-eraser-active {
+    background: #e74c3c !important; /* Red for eraser */
+    border: 2px solid white;
+}
+
+.variant-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px;
+    background: #3a3a3a;
+    margin-bottom: 5px;
+    border-radius: 4px;
+}
+
+.turn-indicator {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: var(--accent);
+}
